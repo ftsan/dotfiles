@@ -4,10 +4,24 @@
 " bundleで管理するディレクトリを指定
 set runtimepath+=~/.vim/bundle/neobundle.vim/
  
+" neobundle settings {{{
+if has('vim_starting')
+  set nocompatible
+  " neobundle をインストールしていない場合は自動インストール
+  if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
+    echo "install neobundle..."
+    " vim からコマンド呼び出しているだけ neobundle.vim のクローン
+    :call system("git clone git://github.com/Shougo/neobundle.vim  ~/.vim/bundle/neobundle.vim")
+  endif
+                      " runtimepath の追加は必須
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" neobundle自体をneobundleで管理
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/ '))
+let g:neobundle_default_git_protocol='https'
   
-" neobundle自体をneobundleで管理
 NeoBundleFetch 'Shougo/neobundle.vim'
    
 " 今後このあたりに追加のプラグインをどんどん書いて行きます！！"
