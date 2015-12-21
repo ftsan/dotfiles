@@ -7,8 +7,8 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # エディタ
-#export EDITOR=/usr/bin/vim
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+export EDITOR=/usr/bin/vim
+#export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 
 # ページャ
 #export PAGER=/usr/local/bin/vimpager
@@ -20,10 +20,6 @@ export MANPAGER=/usr/bin/less
 # -------------------------------------
 # zshのオプション
 # -------------------------------------
-
-## 補完機能の強化
-autoload -U compinit
-compinit
 
 ## 入力しているコマンド名が間違っている場合にもしかして：を出す。
 setopt correct
@@ -65,18 +61,12 @@ export JAVA_HOME=`/usr/libexec/java_home`
 
 path=(
     ${JAVA_HOME}/bin
-    /Users/futeshi/.gvm/vertx/current/bin
-    /Users/futeshi/.gvm/springboot/current/bin
-    /Users/futeshi/.gvm/lazybones/current/bin
-    /Users/futeshi/.gvm/groovyserv/current/bin
-    /Users/futeshi/.gvm/groovy/current/bin
-    /Users/futeshi/.gvm/griffon/current/bin
-    /Users/futeshi/.gvm/grails/current/bin
-    /Users/futeshi/.gvm/gradle/current/bin
-    /Users/futeshi/.gvm/glide/current/bin
-    /Users/futeshi/.gvm/gaiden/current/bin
-    /Users/futeshi/.gvm/crash/current/bin
-    /Users/futeshi/.nodebrew/current/bin
+    /Users/takano/.sdkman/springboot/current/bin
+#    /Users/takano/.sdkman/groovy/current/bin
+    /Users/takano/.sdkman/candidates/groovy/current/bin
+#    /Users/takano/.sdkman/gradle/current/bin
+    /Users/takano/.sdkman/candidates/gradle/current/bin
+    ${NODEBREW_ROOT}/bin
     /usr/local/heroku/bin
     $HOME/bin(N-/)
     /usr/local/bin(N-/)
@@ -86,6 +76,10 @@ path=(
     /sbin
     /bin
     /Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home/db/bin
+    $HOME/.rbenv/bin
+    ~/.rbenv/shims
+    $HOME/.nodebrew/current/bin
+    /usr/local/Cellar/s3cmd/1.6.0/bin/s3cmd
     $path
 )
 
@@ -151,9 +145,15 @@ alias l1="ls -1"
 alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 
 #MacVim設定
-alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+# alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
 # alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mVim "$@"'
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mVim "$@"'
+# alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mVim "$@"'
+
+# eclipse -clean
+alias cleanec='/Applications/Eclipse.app/Contents/MacOS/eclipse -clean'
+
+alias sshcon='vi ~/.ssh/config'
+alias subl='open -a /Applications/Sublime\ Text.app'
 
 
 # -------------------------------------
@@ -195,7 +195,25 @@ ZSH_THEME="cloud"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-[[ -s "/Users/futeshi/.gvm/bin/gvm-init.sh" ]] && source "/Users/futeshi/.gvm/bin/gvm-init.sh"
+# sdkman settings
+export SDKMAN_DIR="/Users/takano/.sdkman"
+[[ -s "/Users/takano/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/takano/.sdkman/bin/sdkman-init.sh"
 
 #rbenvの設定
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# zsh-completions settings
+fpath=(/path/to/homebrew/share/zsh-completions $fpath)
+ 
+# nodebrew setting
+export NODEBREW_ROOT=~/.nodebrew/current
+
+# nodebrew-completions settings
+fpath=($fpath /usr/local/share/zsh/site-functions)
+ 
+autoload -U compinit
+compinit -u
+
+CATALINA_HOME=/usr/local/Cellar/tomcat7/7.0.64/libexec
+
+#SPRING_PROFILES_ACTIVE=locondo-development
