@@ -62,9 +62,7 @@ export JAVA_HOME=`/usr/libexec/java_home`
 path=(
     ${JAVA_HOME}/bin
     /Users/takano/.sdkman/springboot/current/bin
-#    /Users/takano/.sdkman/groovy/current/bin
     /Users/takano/.sdkman/candidates/groovy/current/bin
-#    /Users/takano/.sdkman/gradle/current/bin
     /Users/takano/.sdkman/candidates/gradle/current/bin
     ${NODEBREW_ROOT}/bin
     /usr/local/heroku/bin
