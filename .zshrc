@@ -78,6 +78,8 @@ path=(
     ~/.rbenv/shims
     $HOME/.nodebrew/current/bin
     /usr/local/Cellar/s3cmd/1.6.0/bin/s3cmd
+    /opt/ghc/bin
+    /opt/haskell-stack/bin
     $path
 )
 
