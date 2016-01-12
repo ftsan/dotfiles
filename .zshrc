@@ -80,6 +80,7 @@ path=(
     ~/.rbenv/shims
     $HOME/.nodebrew/current/bin
     /usr/local/Cellar/s3cmd/1.6.0/bin/s3cmd
+    /usr/local/Cellar/unar/1.9.1/bin/
     $path
 )
 
