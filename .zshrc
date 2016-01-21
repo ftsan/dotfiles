@@ -12,9 +12,9 @@ export EDITOR=/usr/bin/vim
 
 # ページャ
 #export PAGER=/usr/local/bin/vimpager
-export PAGER=/usr/bin/less
+export PAGER='/usr/bin/less -R'
 #export MANPAGER=/usr/local/bin/vimpager
-export MANPAGER=/usr/bin/less
+export MANPAGER='/usr/bin/less -R'
 
 
 # -------------------------------------
@@ -80,7 +80,8 @@ path=(
     ~/.rbenv/shims
     $HOME/.nodebrew/current/bin
     /usr/local/Cellar/s3cmd/1.6.0/bin/s3cmd
-    /usr/local/Cellar/unar/1.9.1/bin/
+    /usr/local/Cellar/unar/1.9.1/bin
+    /usr/local/Cellar/colordiff/1.0.16/bin
     $path
 )
 
@@ -156,6 +157,12 @@ alias cleanec='/Applications/Eclipse.app/Contents/MacOS/eclipse -clean'
 alias sshcon='vi ~/.ssh/config'
 alias subl='open -a /Applications/Sublime\ Text.app'
 
+# colordiff
+if [[  -x `which colordiff` ]]; then
+    alias diff='colordiff -u'
+else
+    alias diff='diff -u'
+fi
 
 # -------------------------------------
 # キーバインド
