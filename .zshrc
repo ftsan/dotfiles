@@ -77,9 +77,6 @@ path=(
     $HOME/.rbenv/bin
     ~/.rbenv/shims
     $HOME/.nodebrew/current/bin
-    /usr/local/Cellar/s3cmd/1.6.0/bin/s3cmd
-    /usr/local/Cellar/unar/1.9.1/bin
-    /usr/local/Cellar/colordiff/1.0.16/bin
 #    /opt/ghc/bin
 #    /opt/haskell-stack/bin
     $path
