@@ -62,9 +62,7 @@ export JAVA_HOME=`/usr/libexec/java_home`
 path=(
     ${JAVA_HOME}/bin
     /Users/takano/.sdkman/springboot/current/bin
-#    /Users/takano/.sdkman/groovy/current/bin
     /Users/takano/.sdkman/candidates/groovy/current/bin
-#    /Users/takano/.sdkman/gradle/current/bin
     /Users/takano/.sdkman/candidates/gradle/current/bin
     ${NODEBREW_ROOT}/bin
     /usr/local/heroku/bin
@@ -82,6 +80,8 @@ path=(
     /usr/local/Cellar/s3cmd/1.6.0/bin/s3cmd
     /usr/local/Cellar/unar/1.9.1/bin
     /usr/local/Cellar/colordiff/1.0.16/bin
+#    /opt/ghc/bin
+#    /opt/haskell-stack/bin
     $path
 )
 
