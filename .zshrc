@@ -208,7 +208,7 @@ export SDKMAN_DIR="/Users/takano/.sdkman"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # zsh-completions settings
-fpath=(/path/to/homebrew/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
  
 # nodebrew setting
 export NODEBREW_ROOT=~/.nodebrew/current
