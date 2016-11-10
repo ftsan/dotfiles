@@ -57,9 +57,12 @@ setopt auto_pushd
 typeset -U path cdpath fpath manpath
 
 export JAVA_HOME=`/usr/libexec/java_home`
-#export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+
+# nodebrew setting
+export NODEBREW_ROOT=${HOME}/.nodebrew
 
 path=(
+    ${PYENV_ROOT}/bin
     ${JAVA_HOME}/bin
     /Users/takano/.sdkman/springboot/current/bin
     /Users/takano/.sdkman/candidates/groovy/current/bin
@@ -75,10 +78,11 @@ path=(
     /bin
     /Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home/db/bin
     $HOME/.rbenv/bin
-    ~/.rbenv/shims
-    $HOME/.nodebrew/current/bin
+    $HOME/.rbenv/shims
 #    /opt/ghc/bin
 #    /opt/haskell-stack/bin
+    /usr/local/share/git-core/contrib/diff-highlight
+    $NODEBREW_ROOT/current/bin
     $path
 )
 
@@ -148,11 +152,27 @@ alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 # alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mVim "$@"'
 # alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mVim "$@"'
 
+# pyenv setting
+export PYENV_ROOT=${HOME}/.pyenv
+if [ -d "${PYENV_ROOT}" ]; then
+    export PATH=${PYENV_ROOT}/bin:$PATH
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+alias brew="env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew"
+
 # eclipse -clean
 alias cleanec='/Applications/Eclipse.app/Contents/MacOS/eclipse -clean'
 
+# STS -clean
+alias cleansts='/Applications/sts-bundle/STS.app/Contents/MacOS/STS -clean'
+
 alias sshcon='vi ~/.ssh/config'
 alias subl='open -a /Applications/Sublime\ Text.app'
+alias vsc='open -a /Applications/Visual\ Studio\ Code.app'
+alias atom='open -a /Applications/Atom.app'
+alias jqls='jq "." -C | less -R'
+alias ln='ln -f'
 
 # colordiff
 if [[  -x `which colordiff` ]]; then
@@ -188,18 +208,6 @@ function title {
     echo -ne "\033]0;"$*"\007"
 }
 
-#Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
-ZSH_THEME="cloud"
-
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
-
 # sdkman settings
 export SDKMAN_DIR="/Users/takano/.sdkman"
 [[ -s "/Users/takano/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/takano/.sdkman/bin/sdkman-init.sh"
@@ -209,16 +217,18 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # zsh-completions settings
 fpath=(/usr/local/share/zsh-completions $fpath)
- 
-# nodebrew setting
-export NODEBREW_ROOT=~/.nodebrew/current
 
-# nodebrew-completions settings
-fpath=($fpath /usr/local/share/zsh/site-functions)
- 
 autoload -U compinit
 compinit -u
 
 CATALINA_HOME=/usr/local/Cellar/tomcat7/7.0.64/libexec
 
-#SPRING_PROFILES_ACTIVE=locondo-development
+GATLING_HOME=/usr/local/share/gatling-charts-highcharts-bundle
+
+# Prezto config
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+
+export LESS='-i -M -R -x4'
